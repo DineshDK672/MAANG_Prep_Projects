@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import streamlit as st
 
 
 def fill_null_with_rand_values(df: pd.DataFrame) -> pd.DataFrame:
@@ -34,29 +35,27 @@ df = df.drop(columns=['FavoriteCategory', 'SecondFavoriteCategory'])
 
 # Cleaning CustomerID by trimming the values and dropping rows with nulls
 df["CustomerID"] = df["CustomerID"].str[4:]
-df = df.dropna(subset="CustomerID")
+df = df.dropna(subset=["CustomerID"])
 df["CustomerID"] = df["CustomerID"].astype(int)
 
 # Imputing null values with random values from the respective columns
 df = fill_null_with_rand_values(df)
 
-
 # Cleaning Registration Date by change dtpes and filling nulls
 df["RegistrationDate"] = pd.to_datetime(df["RegistrationDate"])
-
 
 # Imputing improper values in Age with random values of its own distribution
 df["Age"] = df["Age"].astype(int)
 
-# fig, axes = plt.subplots(1, 2)
-# axes[0].hist(df["Age"])
+fig, axes = plt.subplots(1, 2)
+axes[0].hist(df["Age"])
 
 data = df["Age"][df["Age"] >= 18]
 size = df["Age"][df["Age"] < 18].count()
 df.loc[df["Age"] < 18, "Age"] = np.random.choice(data, size=size, replace=True)
 
-# axes[1].hist(df["Age"])
-# plt.show()
+axes[1].hist(df["Age"])
+plt.show()
 
 for col in df.select_dtypes(include='object'):
     print(col, ":")

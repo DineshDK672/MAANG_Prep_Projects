@@ -12,13 +12,13 @@ This is a Python-based data wrangling pipeline integrated with a Streamlit dashb
 
 - Cleans customer engagement data by:
 
-- Trimming and cleaning customer IDs.
+  - Trimming and cleaning customer IDs.
 
-- Imputing null values with random samples from existing data.
+  - Imputing null values with random samples from existing data.
 
-- Handling age outliers using random imputation.
+  - Handling age outliers using random imputation.
 
-- Standardizing categorical variables (e.g., gender, income level).
+  - Standardizing categorical variables (e.g., gender, income level).
 
 - Uses Streamlit for an interactive and user-friendly dashboard interface.
 
